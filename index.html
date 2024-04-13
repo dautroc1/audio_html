@@ -106,7 +106,7 @@ https://templatemo.com/tm-590-topic-listing
                             </div>
                             <div class="col-lg-8 col-12 mx-auto">
                                 <audio controls id="audioPlayer" preload="auto">
-                                    <source src="D:\phim1\re\y2meta.com - Overnight in the World's Loneliest House (128 kbps).mp3" type="audio/mpeg">
+                                    <source src="" type="audio/mpeg">
                                     Your browser does not support the audio element.
                                 </audio>
                             </div>
@@ -120,7 +120,7 @@ https://templatemo.com/tm-590-topic-listing
                             </div>
                             <div class="col-lg-8 col-12 mx-auto">
                             <audio controls id="instrumentPlayer" preload="auto">
-                                <source src="D:\phim1\re\y2meta.com - Overnight in the World's Loneliest House (128 kbps).mp3" type="audio/mpeg">
+                                <source src="" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
@@ -227,7 +227,7 @@ https://templatemo.com/tm-590-topic-listing
                     document.getElementById('loadingMessage').style.display = 'block';
                     document.getElementById('instrumentPlayermain').style.display = 'none';
                     document.getElementById('vocalPlayermain').style.display = 'none';
-                    var apiUrl = 'http://127.0.0.1:5000/process_audio';
+                    var apiUrl = 'https://audio-split-back.onrender.com/process_audio';
                     var formData = new FormData();
                     formData.append('youtube_url', youtubeUrl);
                     fetch(apiUrl, {
