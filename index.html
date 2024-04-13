@@ -233,7 +233,8 @@ https://templatemo.com/tm-590-topic-listing
                         'https://audio-split-back-1.onrender.com/process_audio',
                         'https://audio-split-back-2.onrender.com/process_audio'
                     ];
-                    var apiUrl = randomUrl[Math.floor(Math.random() * apiUrls.length)];
+                    var apiUrl = randomUrl[Math.floor(Math.random() * randomUrl.length)];
+                    console.log(apiUrl)
                     var formData = new FormData();
                     formData.append('youtube_url', youtubeUrl);
                     fetch(apiUrl, {
