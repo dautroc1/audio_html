@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Topic Listing Bootstrap 5 Template</title>
+
+        <!-- CSS FILES -->        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+                        
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/templatemo-topic-listing.css" rel="stylesheet">
+        <style>
+            /* Hide the players initially */
+            #youtubePlayer, #loadingMessage, #vocalPlayermain, #instrumentPlayermain  {
+                display: none;
+            }
+            .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border: 8px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #fff transparent transparent transparent;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+        
+        </style>
+<!--
+
+TemplateMo 590 topic listing
+
+https://templatemo.com/tm-590-topic-listing
+
+-->
+    </head>
+    
+    <body id="top">
+
+        <main>
+
+            
+            
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h1 class="text-white text-center">Watch Youtube Video Without Annoy Music, Sound effect</h1>
+
+                            <form id="youtubeForm" method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bi-search" id="basic-addon1">
+                                        
+                                    </span>
+
+                                    <input id="youtubeUrl" name="youtubeUrl" type="search" class="form-control"  placeholder="Enter YouTube Video URL" aria-label="Search">
+
+                                    <button type="submit" class="form-control">Search</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_2">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div id="youtubePlayer" class="col-lg-8 col-12 mx-auto"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div id="vocalPlayermain">
+                            <div class="col-lg-8 col-12 mx-auto">
+                                <h4 class="text-white text-center">Vocal</h4>
+                            </div>
+                            <div class="col-lg-8 col-12 mx-auto">
+                                <audio controls id="audioPlayer" preload="auto">
+                                    <source src="D:\phim1\re\y2meta.com - Overnight in the World's Loneliest House (128 kbps).mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div id="instrumentPlayermain">
+                            <div class="col-lg-8 col-12 mx-auto">
+                                <h4 class="text-white text-center">Music, Sound effect</h4>
+                            </div>
+                            <div class="col-lg-8 col-12 mx-auto">
+                            <audio controls id="instrumentPlayer" preload="auto">
+                                <source src="D:\phim1\re\y2meta.com - Overnight in the World's Loneliest House (128 kbps).mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div id="loadingMessage" class="col-lg-8 col-12 mx-auto">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                    
+            </section>
+            
+            
+            
+
+
+            
+        </main>
+
+
+
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/custom.js"></script>
+        <script>
+            // Get reference to the audio player
+            var audioPlayer = document.getElementById('audioPlayer');
+            var instrumentPlayer = document.getElementById('instrumentPlayer');
+            var ApiLoaded = false;
+            // Create a YouTube player
+            var youtubePlayer;
+            function onYouTubeIframeAPIReady() {
+                youtubePlayer = new YT.Player('youtubePlayer', {
+                    height: '315',
+                    width: '560',
+                    playerVars: {
+                        'autoplay': 0, // Disable autoplay
+                        'controls': 1,
+                        'rel': 0,
+                        'showinfo': 0,
+                        'fs': 1
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+        
+            // Function to start playing both media elements
+            function playMedia() {
+                
+                audioPlayer.play();
+                instrumentPlayer.play();
+                youtubePlayer.playVideo();
+                
+            }
+        
+            // Function to pause both media elements
+            function pauseMedia() {
+                
+                audioPlayer.pause();
+                instrumentPlayer.pause()
+                youtubePlayer.pauseVideo();
+                
+            }
+        
+            // Event listener for YouTube player ready
+            function onPlayerReady(event) {
+                // Do something when YouTube player is ready
+            }
+        
+            // Event listener for YouTube player state change
+            function onPlayerStateChange(event) {
+                if (ApiLoaded) {
+                if (event.data == YT.PlayerState.PLAYING) {
+                    playMedia();
+                    audioPlayer.currentTime = youtubePlayer.getCurrentTime();
+                    instrumentPlayer.currentTime = youtubePlayer.getCurrentTime();
+                } else if (event.data == YT.PlayerState.PAUSED) {
+                    pauseMedia();
+                    audioPlayer.currentTime = youtubePlayer.getCurrentTime();
+                    instrumentPlayer.currentTime = youtubePlayer.getCurrentTime();
+                } else if (event.data == YT.PlayerState.ENDED) {
+                    pauseMedia();
+                }
+            }
+            }
+        
+            // Event listener for form submission
+            document.getElementById('youtubeForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var youtubeUrl = document.getElementById('youtubeUrl').value;
+                var videoId = getYouTubeVideoId(youtubeUrl);
+                if (videoId) {
+                    youtubePlayer.cueVideoById(videoId);
+                    // Show the players after submitting the form
+                    document.getElementById('youtubePlayer').style.display = 'block';
+                    document.getElementById('loadingMessage').style.display = 'block';
+                    document.getElementById('instrumentPlayermain').style.display = 'none';
+                    document.getElementById('vocalPlayermain').style.display = 'none';
+                    var apiUrl = 'http://127.0.0.1:5000/process_audio';
+                    var formData = new FormData();
+                    formData.append('youtube_url', youtubeUrl);
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'  // Set content type to JSON
+                        },
+                        body: JSON.stringify({ "youtube_url": youtubeUrl }) 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        
+                        // Hide loading spinner
+                        document.getElementById('loadingMessage').style.display = 'none';
+                        ApiLoaded = true;
+                        // Show the audio player after receiving the response
+                        document.getElementById('instrumentPlayermain').style.display = 'block';
+                        document.getElementById('vocalPlayermain').style.display = 'block';
+                        // Get the audio path and set it as the source for the audio player
+                        var vocalPath = data.vocal_path;
+                        var instrumental_path = data.instrumental_path;
+                        audioPlayer.src = vocalPath;
+                        instrumentPlayer.src = instrumental_path;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while processing the URL. Please try again.');
+        
+                        // Hide loading spinner on error
+                        
+                    });
+                } else {
+                    alert('Invalid YouTube video URL');
+                }
+            });
+                
+        
+            // Function to extract YouTube video ID from URL
+            function getYouTubeVideoId(url) {
+                var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                if (match && match[2].length == 11) {
+                    return match[2];
+                } else {
+                    return null;
+                }
+            }
+        </script>
+        
+        <!-- Load YouTube Iframe Player API -->
+        <script src="https://www.youtube.com/iframe_api"></script>
+        
+
+    </body>
+</html>
