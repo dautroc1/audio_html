@@ -228,7 +228,12 @@ https://templatemo.com/tm-590-topic-listing
                     document.getElementById('loadingMessage').style.display = 'block';
                     document.getElementById('instrumentPlayermain').style.display = 'none';
                     document.getElementById('vocalPlayermain').style.display = 'none';
-                    var apiUrl = 'https://audio-split-back.onrender.com/process_audio';
+                    var randomUrl = [
+                        'https://audio-split-back.onrender.com/process_audio',
+                        'https://audio-split-back-1.onrender.com/process_audio',
+                        'https://audio-split-back-2.onrender.com/process_audio'
+                    ];
+                    var apiUrl = randomUrl[Math.floor(Math.random() * apiUrls.length)];
                     var formData = new FormData();
                     formData.append('youtube_url', youtubeUrl);
                     fetch(apiUrl, {
